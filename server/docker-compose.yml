@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5555:5432"
+    environment:
+      POSTGRES_PASSWORD: stgm-db-pass
+      POSTGRES_USER: stgm-user
+      POSTGRES_DB: side-tracker-game
