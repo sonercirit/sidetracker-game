@@ -9,5 +9,5 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: { "no-console": [0] },
+  rules: { "no-console": [0], "import/extensions": [2, "always"] },
 };
