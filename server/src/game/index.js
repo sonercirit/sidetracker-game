@@ -4,10 +4,28 @@ import handleError from "../../error.js";
 
 const router = express.Router();
 
+// get games
 router.get("/", async (req, res) => {
   try {
     const games = await db.game.findMany();
     return res.json(games);
+  } catch (e) {
+    return handleError(e, res);
+  }
+});
+
+// create game
+router.post("/", async (req, res) => {
+  try {
+    const game = await db.game.create({
+      data: {
+        player1Id: req.body.playerId,
+        players: {
+          connect: [{ id: req.body.playerId }],
+        },
+      },
+    });
+    return res.json(game);
   } catch (e) {
     return handleError(e, res);
   }

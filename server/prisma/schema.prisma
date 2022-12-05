@@ -13,8 +13,8 @@ datasource db {
 model Game {
   id        String   @id @default(uuid())
   player1Id String
-  player2Id String
-  board     String
+  player2Id String?
+  board     Json     @default("[[\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"], [\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"], [\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"], [\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"], [\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"], [\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"], [\"_\", \"_\", \"_\", \"_\", \"_\", \"_\", \"_\"]]")
   moves     Move[]
   players   Player[]
   createdAt DateTime @default(now())
