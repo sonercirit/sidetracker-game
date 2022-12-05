@@ -1,6 +1,7 @@
 import "./App.css";
 import CreatePlayer from "./player/create";
 import { useState } from "react";
+import ListGames from "./game/list";
 
 function App() {
   const [id, setID] = useState("");
@@ -8,7 +9,16 @@ function App() {
 
   return (
     <div className="base">
-      <CreatePlayer name={name} setName={setName} id={id} setID={setID} />
+      {id ? (
+        <div>
+          <span>your id is {id}</span>
+          <br />
+          <span>your name is {name}</span>
+          <ListGames />
+        </div>
+      ) : (
+        <CreatePlayer name={name} setName={setName} setID={setID} />
+      )}
     </div>
   );
 }
