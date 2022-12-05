@@ -2,6 +2,7 @@ import "./App.css";
 import CreatePlayer from "./player/create";
 import { useState } from "react";
 import ListGames from "./game/list";
+import CreateGame from "./game/create";
 
 function App() {
   const [id, setID] = useState("");
@@ -14,6 +15,7 @@ function App() {
           <span>your id is {id}</span>
           <br />
           <span>your name is {name}</span>
+          <CreateGame id={id} />
           <ListGames />
         </div>
       ) : (
