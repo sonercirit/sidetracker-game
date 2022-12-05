@@ -1,6 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import player from "./player/index.js";
+import game from "./game/index.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/players", player);
+app.use("/games", game);
 
 app.listen(port, () => {
   console.log(`SSGM app listening on port ${port}`);
