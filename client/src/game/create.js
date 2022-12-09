@@ -1,4 +1,4 @@
-export default function CreateGame({ id, setGameID }) {
+export default function CreateGame({ id, setGameID, setBoard }) {
   const handleCreate = async () => {
     const game = await fetch(`${process.env.REACT_APP_SERVER_URL}/games`, {
       method: "POST",
@@ -11,6 +11,7 @@ export default function CreateGame({ id, setGameID }) {
     const data = await game.json();
     console.log(data);
     setGameID(data.id);
+    setBoard(data.board);
   };
 
   return (
