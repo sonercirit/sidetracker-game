@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+const socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}`);
 export default function ShowGame({ board, setBoard, gameID, id }) {
   const [column, setColumn] = useState("");
   const [side, setSide] = useState("");
 
-  const handleMove = async () => {
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/moves`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ gameId: gameID, playerId: id, side, column }),
+  useEffect(() => {
+    socket.addEventListener("message", (event) => {
+      console.log("Message from server ", event.data);
+      setBoard(JSON.parse(event.data));
     });
-    const data = await response.json();
-    setBoard(data.board);
+    socket.addEventListener("open", () => {
+      socket.send(
+        JSON.stringify({ gameId: gameID, playerId: id, type: "register" })
+      );
+    });
+  }, [setBoard, gameID, id]);
+
+  const handleMove = async () => {
+    socket.send(JSON.stringify({ gameId: gameID, playerId: id, side, column }));
   };
 
   return (
