@@ -5,15 +5,14 @@ export default function ShowGame({ board, setBoard, gameID, id, playerOrder }) {
   const [column, setColumn] = useState("");
   const [side, setSide] = useState("");
 
+  socket.send(
+    JSON.stringify({ gameId: gameID, playerId: id, type: "register" })
+  );
+
   useEffect(() => {
     socket.addEventListener("message", (event) => {
       console.log("Message from server ", event.data);
       setBoard(JSON.parse(event.data));
-    });
-    socket.addEventListener("open", () => {
-      socket.send(
-        JSON.stringify({ gameId: gameID, playerId: id, type: "register" })
-      );
     });
   }, [setBoard, gameID, id]);
 
