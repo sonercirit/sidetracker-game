@@ -27,6 +27,17 @@ export default function ShowGame({ board, setBoard, gameID, id, playerOrder }) {
   }, [board]);
   console.log(turn);
 
+  const whoWon = useMemo(() => {
+    for (const column of board) {
+      if (column.join("").includes("XXXX")) {
+        return 1;
+      } else if (column.join("").includes("OOOO")) {
+        return 2;
+      }
+    }
+    return null;
+  }, [board]);
+
   return (
     <div>
       {board.map((firstDepth) => (
@@ -51,14 +62,16 @@ export default function ShowGame({ board, setBoard, gameID, id, playerOrder }) {
           </button>
         ))}
       </div>
-      {
+      {whoWon ? (
+        <div>{`Player ${whoWon} won!`}</div>
+      ) : (
         <button
           disabled={!(column && side) || !(turn === playerOrder)}
           onClick={handleMove}
         >
           submit
         </button>
-      }
+      )}
     </div>
   );
 }
