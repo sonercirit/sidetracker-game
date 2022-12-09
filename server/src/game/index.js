@@ -7,7 +7,11 @@ const router = express.Router();
 // get games
 router.get("/", async (req, res) => {
   try {
-    const games = await db.game.findMany();
+    const games = await db.game.findMany({
+      where: {
+        player2Id: null,
+      },
+    });
     return res.json(games);
   } catch (e) {
     return handleError(e, res);
