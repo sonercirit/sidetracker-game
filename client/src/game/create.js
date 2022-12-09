@@ -1,8 +1,4 @@
-import { useState } from "react";
-
-export default function CreateGame({ id }) {
-  const [gameID, setGameID] = useState("");
-
+export default function CreateGame({ id, setGameID }) {
   const handleCreate = async () => {
     const game = await fetch(`${process.env.REACT_APP_SERVER_URL}/games`, {
       method: "POST",
@@ -19,15 +15,9 @@ export default function CreateGame({ id }) {
 
   return (
     <div>
-      {gameID ? (
-        <div>
-          <span>your game id is {gameID}</span>
-        </div>
-      ) : (
-        <div>
-          <button onClick={handleCreate}>create new game</button>
-        </div>
-      )}
+      <div>
+        <button onClick={handleCreate}>create new game</button>
+      </div>
     </div>
   );
 }

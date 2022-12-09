@@ -8,6 +8,8 @@ function App() {
   const [id, setID] = useState("");
   const [name, setName] = useState("");
 
+  const [gameID, setGameID] = useState("");
+
   return (
     <div className="base">
       {id ? (
@@ -15,8 +17,16 @@ function App() {
           <span>your id is {id}</span>
           <br />
           <span>your name is {name}</span>
-          <CreateGame id={id} />
-          <ListGames />
+          {gameID ? (
+            <div>
+              <span>your game id is {gameID}</span>
+            </div>
+          ) : (
+            <div>
+              <CreateGame id={id} setGameID={setGameID} />
+              <ListGames />
+            </div>
+          )}
         </div>
       ) : (
         <CreatePlayer name={name} setName={setName} setID={setID} />
