@@ -11,6 +11,9 @@ router.get("/", async (req, res) => {
       where: {
         player2Id: null,
       },
+      include: {
+        players: true,
+      },
     });
     return res.json(games);
   } catch (e) {
@@ -26,6 +29,27 @@ router.post("/", async (req, res) => {
         player1Id: req.body.playerId,
         players: {
           connect: [{ id: req.body.playerId }],
+        },
+      },
+    });
+    return res.json(game);
+  } catch (e) {
+    return handleError(e, res);
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    const game = await db.game.update({
+      where: {
+        id: req.params.id,
+      },
+      data: {
+        player2Id: req.body.playerId,
+        players: {
+          connect: {
+            id: req.body.playerId,
+          },
         },
       },
     });
