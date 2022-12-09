@@ -27,7 +27,7 @@ function App() {
           ) : (
             <div>
               <CreateGame id={id} setGameID={setGameID} setBoard={setBoard} />
-              <ListGames />
+              <ListGames id={id} setGameId={setGameID} setBoard={setBoard} />
             </div>
           )}
         </div>
