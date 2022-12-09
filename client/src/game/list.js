@@ -13,10 +13,13 @@ export default function ListGames() {
   }, []);
 
   return (
-    <ul>
-      {games.map((value) => (
-        <li>{JSON.stringify(value)}</li>
-      ))}
-    </ul>
+    <div>
+      <h2>list of games where player 2 isn't present</h2>
+      <ul>
+        {games.map((value) => (
+          <li>{JSON.stringify(value)}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
