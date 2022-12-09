@@ -8,6 +8,7 @@ import ShowGame from "./game/show";
 function App() {
   const [id, setID] = useState("");
   const [name, setName] = useState("");
+  const [playerOrder, setPlayerOrder] = useState("");
 
   const [gameID, setGameID] = useState("");
   const [board, setBoard] = useState([]);
@@ -27,12 +28,23 @@ function App() {
                 setBoard={setBoard}
                 gameID={gameID}
                 id={id}
+                playerOrder={playerOrder}
               />
             </div>
           ) : (
             <div>
-              <CreateGame id={id} setGameID={setGameID} setBoard={setBoard} />
-              <ListGames id={id} setGameId={setGameID} setBoard={setBoard} />
+              <CreateGame
+                id={id}
+                setGameID={setGameID}
+                setBoard={setBoard}
+                setPlayerOrder={setPlayerOrder}
+              />
+              <ListGames
+                id={id}
+                setGameId={setGameID}
+                setBoard={setBoard}
+                setPlayerOrder={setPlayerOrder}
+              />
             </div>
           )}
         </div>

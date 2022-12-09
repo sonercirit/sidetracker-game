@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}`);
-export default function ShowGame({ board, setBoard, gameID, id }) {
+export default function ShowGame({ board, setBoard, gameID, id, playerOrder }) {
   const [column, setColumn] = useState("");
   const [side, setSide] = useState("");
 
@@ -20,6 +20,13 @@ export default function ShowGame({ board, setBoard, gameID, id }) {
   const handleMove = async () => {
     socket.send(JSON.stringify({ gameId: gameID, playerId: id, side, column }));
   };
+
+  const turn = useMemo(() => {
+    const xMoves = board.flat().filter((move) => move === "X");
+    const oMoves = board.flat().filter((move) => move === "O");
+    return xMoves.length <= oMoves.length ? 1 : 2;
+  }, [board]);
+  console.log(turn);
 
   return (
     <div>
@@ -46,7 +53,10 @@ export default function ShowGame({ board, setBoard, gameID, id }) {
         ))}
       </div>
       {
-        <button disabled={!(column && side)} onClick={handleMove}>
+        <button
+          disabled={!(column && side) || !(turn === playerOrder)}
+          onClick={handleMove}
+        >
           submit
         </button>
       }

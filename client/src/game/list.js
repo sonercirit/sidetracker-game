@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 
-export default function ListGames({ id, setGameId, setBoard }) {
+export default function ListGames({ id, setGameId, setBoard, setPlayerOrder }) {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ export default function ListGames({ id, setGameId, setBoard }) {
     const data = await game.json();
     setGameId(data.id);
     setBoard(data.board);
+    setPlayerOrder(2);
   };
 
   return (
