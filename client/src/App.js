@@ -22,7 +22,12 @@ function App() {
           {gameID ? (
             <div>
               <span>your game id is {gameID}</span>
-              <ShowGame board={board} />
+              <ShowGame
+                board={board}
+                setBoard={setBoard}
+                gameID={gameID}
+                id={id}
+              />
             </div>
           ) : (
             <div>
